@@ -175,8 +175,7 @@ app.post('/dashboard/mark-read/:id', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/logout', (req, res) => {
-    // Perform any additional cleanup or logging out logic here if needed
+app.get('/logout', (req, res) => 
 
     req.logout((err) => {
         if (err) {
