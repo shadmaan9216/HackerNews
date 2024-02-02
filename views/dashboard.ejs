@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    form {
+      /* Add styles to the form if needed */
+      display: inline-block;
+      /* Ensure the form is inline */
+    }
+
+    div {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      float: left;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Dashboard</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <% if (!user) { %>
+      <!-- Display login and signup buttons if the user is not logged in -->
+      <a href="/login">Login</a>
+      <a href="/signup">Signup</a>
+      <% } else { %>
+        <!-- Display a logout button if the user is logged in -->
+        <a href="/logout">Logout</a>
+        <% } %>
+  </nav>
+
+  <!-- Your dashboard content goes here -->
+  <% newsItems.forEach(item=> { %>
+    <div>
+      <a href="<%= item.url %>">
+        <%=item.title %>
+      </a>
+
+      <p><strong>Upvotes:</strong>
+        <%= item.upvotes %>
+      </p>
+      <p><strong>Comments:</strong>
+        <%= item.comments %>
+      </p>
+      <% if (item.posted_on) { %>
+        <p><strong>Posted On:</strong>
+          <%= item.posted_on %>
+        </p>
+        <% } %>
+
+          <!-- Mark as Read form -->
+          <% if (!item.isRead) { %>
+            <form action="/dashboard/mark-read/<%= item._id %>" method="post">
+              <button type="submit">Mark as Read</button>
+            </form>
+            <% } %>
+
+              <!-- Delete form -->
+              <% if (!item.isDeleted) { %>
+                <form action="/dashboard/delete/<%= item._id %>" method="post">
+                  <button type="submit">Delete</button>
+                </form>
+                <% } %>
+    </div>
+    <% }); %>
+</body>
+
+</html>
