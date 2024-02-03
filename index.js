@@ -75,10 +75,10 @@ const crawlHackerNews = async () => {
         const newsItems = [];
         //console.log($.html());
 
-        $('.itemlist .athing').each((index, element) => {
-            console.log($(element).html()); // Log the HTML content of each selected element
-            // Rest of the code...
-        });
+        // $(' tr.athing').each((index, element) => {
+        //     console.log($(element).html()); // Log the HTML content of each selected element
+        //     // Rest of the code...
+        // });
 
 
 
@@ -152,7 +152,7 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-// Dashboard route
+
 // Dashboard route
 app.get('/dashboard', async (req, res) => {
     try {
@@ -199,10 +199,10 @@ app.post('/dashboard/delete/:id', async (req, res) => {
 });
 
 
-// Use the authentication router
+
 app.use(authRouter);
 
-// Start the server
+// Starting the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {
     console.log(`Server is running on port ${PORT}`);
